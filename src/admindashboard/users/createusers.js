@@ -2203,22 +2203,22 @@ app.get("/getleadsource", (req, res) => {
 
 
 
-// app.post("/addcourses", (req, res) => {
-//   const sql = "INSERT INTO courses_settings (course_name, fee, createdby) VALUES (?, ?, ?)";
-//   const values = [req.body.course_name, req.body.fee, req.body.username];
+app.post("/addcourses", (req, res) => {
+  const sql = "INSERT INTO courses_settings (course_name, fee, createdby, max_discount, course_package, date) VALUES (?, ?, ?, ?, ?, ?)";
+  const values = [req.body.course_name, req.body.fee, req.body.createdby, req.body.max_discount, req.body.course_package, req.body.date];
 
-//   if (!values.every((value) => value !== undefined)) {
-//     return res.status(422).json("fill the fields");
-//   }
-
-//   connection.query(sql, values, (err, result) => {
-//     if (err) {
-//       return res.json({ Error: "error adding course" });
-//     } else {
-//       return res.status(201).json(req.body);
-//     }
-//   });
-// });
+  if (!values.every((value) => value !== undefined)) {
+    return res.status(422).json("fill the fields");
+  }
+  
+  connection.query(sql, values, (err, result) => {
+    if (err) {
+      return res.json({ Error: "error adding course" });
+    } else {
+      return res.status(201).json(req.body);
+    }
+  });
+});
 
 // app.post("/addcourses", (req, res) => {
 //   const sqlAddColumn = "ALTER TABLE courses_settings ADD COLUMN IF NOT EXISTS max_discount VARCHAR(255) DEFAULT 0";
